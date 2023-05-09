@@ -9,11 +9,17 @@ public class Barrier
     public Image Image;
     public int HP;
 
-    public Barrier(Point pos, Size size, Image image, int hp) 
+    public Barrier(Point pos, Size size, Image image, int hp)
     {
         Position = pos;
         Size = size;
         Image = image;
         HP = hp;
     }
+
+    public void GetDamage()
+    {
+        HP -= 1;
+    }
+
 }

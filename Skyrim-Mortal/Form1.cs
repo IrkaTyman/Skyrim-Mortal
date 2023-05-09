@@ -30,10 +30,10 @@ namespace Skyrim_Mortal
             this.BackgroundImage = Map.MapBackground;
             this.Width = Map.CellSize * Map.MapWidth + 15;
             this.Height = Map.CellSize * (Map.MapHeight + 1) + 8;
-            labelPlayer.Text = "Fire";
-            labelEnemy.Text = "Fire";
+            labelPlayer1.Text = "Fire";
+            labelPlayer2.Text = "Fire";
 
-            playerFirst = new Player(new Point(0, 120), Nord.Icon);
+            playerFirst = new Player(new Point(150,420), Nord.Icon);
             playerSecond = new Player(new Point(1050, 420), Danmer.Icon);
 
             timer1.Start();
@@ -113,25 +113,28 @@ namespace Skyrim_Mortal
                     case Keys.Space:
                         if (playerFirst.IsCollide(playerSecond) && playerFirst.IsStronger(playerSecond))
                             playerSecond.GetDamage();
+                        var (IsCollide, Barrier) = Map.FindCollide(playerFirst, new Point(playerFirst.Speed * playerFirst.Flip, 0));
+                        if (Barrier != null)
+                            Barrier.GetDamage();
                         playerFirst.dX = 0;
                         playerFirst.dY = 0;
                         playerFirst.SetAnimationConfiguration(2);
                         break;
                     case Keys.F:
                         playerFirst.CurElement = Player.Element.Fire;
-                        labelPlayer.Text = "Fire";
+                        labelPlayer1.Text = "Fire";
                         break;
                     case Keys.G:
                         playerFirst.CurElement = Player.Element.Earth;
-                        labelPlayer.Text = "Earth";
+                        labelPlayer1.Text = "Earth";
                         break;
                     case Keys.H:
                         playerFirst.CurElement = Player.Element.Electricity;
-                        labelPlayer.Text = "Electricity";
+                        labelPlayer1.Text = "Electricity";
                         break;
                     case Keys.J:
                         playerFirst.CurElement = Player.Element.Water;
-                        labelPlayer.Text = "Water";
+                        labelPlayer1.Text = "Water";
                         break;
                 }
             }
@@ -171,19 +174,19 @@ namespace Skyrim_Mortal
                         break;
                     case Keys.NumPad0:
                         playerSecond.CurElement = Player.Element.Fire;
-                        labelEnemy.Text = "Fire";
+                        labelPlayer2.Text = "Fire";
                         break;
                     case Keys.NumPad1:
                         playerSecond.CurElement = Player.Element.Earth;
-                        labelEnemy.Text = "Earth";
+                        labelPlayer2.Text = "Earth";
                         break;
                     case Keys.NumPad2:
                         playerSecond.CurElement = Player.Element.Electricity;
-                        labelEnemy.Text = "Electricity";
+                        labelPlayer2.Text = "Electricity";
                         break;
                     case Keys.NumPad3:
                         playerSecond.CurElement = Player.Element.Water;
-                        labelEnemy.Text = "Water";
+                        labelPlayer2.Text = "Water";
                         break;
                 }
             }
@@ -244,6 +247,12 @@ namespace Skyrim_Mortal
                 {
                     var thing = Map.MapThings[i, j];
                     if (thing == null) continue;
+                    if (thing.HP == 0)
+                    {
+                        Map.MapThings[i, j] = null;
+                        continue;
+                    }
+
                     graphics.DrawImage(thing.Image, new Point(j * Map.CellSize, i * Map.CellSize));
                 }
         }
@@ -253,12 +262,12 @@ namespace Skyrim_Mortal
             Uri uri = new Uri(Path.Combine(new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "music\\base.wav"));
         }
 
-        private void pictureBox3_Click(object sender, EventArgs e)
+        private void labelPlayer_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void labelPlayer_Click_1(object sender, EventArgs e)
         {
 
         }

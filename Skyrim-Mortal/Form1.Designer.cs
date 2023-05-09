@@ -30,35 +30,36 @@ namespace Skyrim_Mortal
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             timer1 = new System.Windows.Forms.Timer(components);
-            labelPlayer = new Label();
+            labelPlayer1 = new Label();
             imageList1 = new ImageList(components);
-            labelEnemy = new Label();
-            pictureBox1 = new PictureBox();
             HPPlayerBar = new ProgressBar();
-            pictureBox2 = new PictureBox();
+            pictureBox6 = new PictureBox();
+            labelPlayer2 = new Label();
             progressBar1 = new ProgressBar();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            pictureBox7 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
             SuspendLayout();
             // 
             // timer1
             // 
             timer1.Interval = 1000;
             // 
-            // labelPlayer
+            // labelPlayer1
             // 
-            labelPlayer.AutoSize = true;
-            labelPlayer.BackColor = Color.MidnightBlue;
-            labelPlayer.FlatStyle = FlatStyle.Popup;
-            labelPlayer.Font = new Font("Microsoft YaHei", 10F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            labelPlayer.ForeColor = Color.LightSkyBlue;
-            labelPlayer.Location = new Point(307, 83);
-            labelPlayer.Margin = new Padding(4, 0, 4, 0);
-            labelPlayer.Name = "labelPlayer";
-            labelPlayer.Size = new Size(85, 19);
-            labelPlayer.TabIndex = 3;
-            labelPlayer.Text = "labelPlayer";
+            labelPlayer1.AutoSize = true;
+            labelPlayer1.BackColor = Color.FromArgb(50, 50, 50);
+            labelPlayer1.Font = new Font("MingLiU_HKSCS-ExtB", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelPlayer1.ForeColor = Color.White;
+            labelPlayer1.Location = new Point(57, 39);
+            labelPlayer1.Margin = new Padding(4, 0, 4, 0);
+            labelPlayer1.Name = "labelPlayer1";
+            labelPlayer1.Size = new Size(95, 13);
+            labelPlayer1.TabIndex = 3;
+            labelPlayer1.Text = "labelPlayer";
+            labelPlayer1.Click += labelPlayer_Click_1;
             // 
             // imageList1
             // 
@@ -66,81 +67,74 @@ namespace Skyrim_Mortal
             imageList1.ImageSize = new Size(16, 16);
             imageList1.TransparentColor = Color.Transparent;
             // 
-            // labelEnemy
-            // 
-            labelEnemy.AutoSize = true;
-            labelEnemy.BackColor = Color.MidnightBlue;
-            labelEnemy.Font = new Font("Microsoft YaHei", 10F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            labelEnemy.ForeColor = Color.LightSkyBlue;
-            labelEnemy.Location = new Point(1184, 105);
-            labelEnemy.Margin = new Padding(4, 0, 4, 0);
-            labelEnemy.Name = "labelEnemy";
-            labelEnemy.RightToLeft = RightToLeft.No;
-            labelEnemy.Size = new Size(89, 19);
-            labelEnemy.TabIndex = 5;
-            labelEnemy.Text = "labelEnemy";
-            labelEnemy.TextAlign = ContentAlignment.TopRight;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.BackColor = Color.Transparent;
-            pictureBox1.Image = Properties.Resources.bar;
-            pictureBox1.ImageLocation = "D:\\Ilyxa\\УЧЕБА\\Прога\\GAME\\GameForULearnCourse\\Arena\\Arena\\Arena\\Sprites\\HpBarHero.png";
-            pictureBox1.Location = new Point(13, 27);
-            pictureBox1.Margin = new Padding(4, 3, 4, 3);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(425, 23);
-            pictureBox1.TabIndex = 6;
-            pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
-            // 
             // HPPlayerBar
             // 
             HPPlayerBar.BackColor = Color.FloralWhite;
             HPPlayerBar.ForeColor = SystemColors.MenuText;
-            HPPlayerBar.Location = new Point(39, 28);
+            HPPlayerBar.Location = new Point(38, 14);
             HPPlayerBar.Margin = new Padding(4, 3, 4, 3);
             HPPlayerBar.Name = "HPPlayerBar";
             HPPlayerBar.RightToLeft = RightToLeft.Yes;
-            HPPlayerBar.Size = new Size(371, 22);
+            HPPlayerBar.Size = new Size(370, 20);
             HPPlayerBar.TabIndex = 0;
             HPPlayerBar.Value = 100;
             // 
-            // pictureBox2
+            // pictureBox6
             // 
-            pictureBox2.BackColor = Color.Transparent;
-            pictureBox2.Image = Properties.Resources.bar;
-            pictureBox2.ImageLocation = "D:\\Ilyxa\\УЧЕБА\\Прога\\GAME\\GameForULearnCourse\\Arena\\Arena\\Arena\\Sprites\\HpBarHero.png";
-            pictureBox2.Location = new Point(790, 27);
-            pictureBox2.Margin = new Padding(4, 3, 4, 3);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(425, 23);
-            pictureBox2.TabIndex = 7;
-            pictureBox2.TabStop = false;
+            pictureBox6.BackColor = Color.Transparent;
+            pictureBox6.Image = (Image)resources.GetObject("pictureBox6.Image");
+            pictureBox6.Location = new Point(12, 12);
+            pictureBox6.Name = "pictureBox6";
+            pictureBox6.Size = new Size(424, 79);
+            pictureBox6.TabIndex = 9;
+            pictureBox6.TabStop = false;
+            // 
+            // labelPlayer2
+            // 
+            labelPlayer2.AutoSize = true;
+            labelPlayer2.BackColor = Color.FromArgb(50, 50, 50);
+            labelPlayer2.Font = new Font("MingLiU_HKSCS-ExtB", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelPlayer2.ForeColor = Color.White;
+            labelPlayer2.Location = new Point(1088, 42);
+            labelPlayer2.Margin = new Padding(4, 0, 4, 0);
+            labelPlayer2.Name = "labelPlayer2";
+            labelPlayer2.Size = new Size(55, 13);
+            labelPlayer2.TabIndex = 11;
+            labelPlayer2.Text = "label1";
             // 
             // progressBar1
             // 
             progressBar1.BackColor = Color.FloralWhite;
             progressBar1.ForeColor = SystemColors.MenuText;
-            progressBar1.Location = new Point(817, 28);
+            progressBar1.Location = new Point(829, 16);
             progressBar1.Margin = new Padding(4, 3, 4, 3);
             progressBar1.Name = "progressBar1";
             progressBar1.RightToLeft = RightToLeft.Yes;
-            progressBar1.Size = new Size(371, 22);
-            progressBar1.TabIndex = 8;
+            progressBar1.Size = new Size(370, 20);
+            progressBar1.TabIndex = 10;
             progressBar1.Value = 100;
+            // 
+            // pictureBox7
+            // 
+            pictureBox7.BackColor = Color.Transparent;
+            pictureBox7.Image = (Image)resources.GetObject("pictureBox7.Image");
+            pictureBox7.Location = new Point(803, 14);
+            pictureBox7.Name = "pictureBox7";
+            pictureBox7.Size = new Size(424, 79);
+            pictureBox7.TabIndex = 12;
+            pictureBox7.TabStop = false;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1239, 667);
+            Controls.Add(labelPlayer2);
             Controls.Add(progressBar1);
-            Controls.Add(pictureBox2);
-            Controls.Add(labelEnemy);
-            Controls.Add(labelPlayer);
+            Controls.Add(pictureBox7);
+            Controls.Add(labelPlayer1);
             Controls.Add(HPPlayerBar);
-            Controls.Add(pictureBox1);
+            Controls.Add(pictureBox6);
             DoubleBuffered = true;
             Margin = new Padding(4, 3, 4, 3);
             MaximumSize = new Size(1255, 706);
@@ -148,8 +142,8 @@ namespace Skyrim_Mortal
             Name = "Form1";
             Text = "Form1";
             Paint += OnPaint;
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -159,14 +153,17 @@ namespace Skyrim_Mortal
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ProgressBar HPPlayerBar;
         private System.Windows.Forms.ProgressBar HPEnemyBar;
-        private System.Windows.Forms.Label labelPlayer;
+        private System.Windows.Forms.Label labelPlayer1;
         private System.Windows.Forms.ImageList imageList1;
-        private System.Windows.Forms.Label labelEnemy;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.PictureBox pictureBox4;
+        private PictureBox pictureBox2;
+        private PictureBox pictureBox5;
+        private PictureBox pictureBox6;
+        private Label labelPlayer2;
         private ProgressBar progressBar1;
+        private PictureBox pictureBox7;
     }
 }
 

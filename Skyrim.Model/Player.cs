@@ -54,9 +54,9 @@ public class Player
 
     public void Move()
     {
-        if (!Map.IsCollide(this, new Point(dX, dY)) && IsMoving)
+        if (!Map.FindCollide(this, new Point(dX, dY)).IsCollide && IsMoving)
         {
-            Position = Position +  new Size(dX, dY);
+            Position = Position + new Size(dX, dY);
         }
     }
 

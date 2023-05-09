@@ -31,49 +31,20 @@ namespace Skyrim_Mortal
         {
             components = new System.ComponentModel.Container();
             timer1 = new System.Windows.Forms.Timer(components);
-            HPPlayerBar = new ProgressBar();
-            HPEnemyBar = new ProgressBar();
             labelPlayer = new Label();
             imageList1 = new ImageList(components);
             labelEnemy = new Label();
             pictureBox1 = new PictureBox();
+            HPPlayerBar = new ProgressBar();
             pictureBox2 = new PictureBox();
-            pictureBox3 = new PictureBox();
-            pictureBox4 = new PictureBox();
+            progressBar1 = new ProgressBar();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             SuspendLayout();
             // 
             // timer1
             // 
             timer1.Interval = 1000;
-            // 
-            // HPPlayerBar
-            // 
-            HPPlayerBar.BackColor = Color.FloralWhite;
-            HPPlayerBar.ForeColor = SystemColors.MenuText;
-            HPPlayerBar.Location = new Point(133, 53);
-            HPPlayerBar.Margin = new Padding(4, 3, 4, 3);
-            HPPlayerBar.Name = "HPPlayerBar";
-            HPPlayerBar.RightToLeft = RightToLeft.Yes;
-            HPPlayerBar.Size = new Size(474, 25);
-            HPPlayerBar.TabIndex = 0;
-            HPPlayerBar.Value = 100;
-            // 
-            // HPEnemyBar
-            // 
-            HPEnemyBar.BackColor = SystemColors.MenuText;
-            HPEnemyBar.ForeColor = SystemColors.MenuText;
-            HPEnemyBar.Location = new Point(643, 53);
-            HPEnemyBar.Margin = new Padding(4, 3, 4, 3);
-            HPEnemyBar.Name = "HPEnemyBar";
-            HPEnemyBar.RightToLeft = RightToLeft.Yes;
-            HPEnemyBar.RightToLeftLayout = true;
-            HPEnemyBar.Size = new Size(471, 25);
-            HPEnemyBar.TabIndex = 1;
-            HPEnemyBar.Value = 100;
             // 
             // labelPlayer
             // 
@@ -82,7 +53,7 @@ namespace Skyrim_Mortal
             labelPlayer.FlatStyle = FlatStyle.Popup;
             labelPlayer.Font = new Font("Microsoft YaHei", 10F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             labelPlayer.ForeColor = Color.LightSkyBlue;
-            labelPlayer.Location = new Point(166, 105);
+            labelPlayer.Location = new Point(307, 83);
             labelPlayer.Margin = new Padding(4, 0, 4, 0);
             labelPlayer.Name = "labelPlayer";
             labelPlayer.Size = new Size(85, 19);
@@ -113,60 +84,63 @@ namespace Skyrim_Mortal
             // pictureBox1
             // 
             pictureBox1.BackColor = Color.Transparent;
+            pictureBox1.Image = Properties.Resources.bar;
             pictureBox1.ImageLocation = "D:\\Ilyxa\\УЧЕБА\\Прога\\GAME\\GameForULearnCourse\\Arena\\Arena\\Arena\\Sprites\\HpBarHero.png";
-            pictureBox1.Location = new Point(10, 14);
+            pictureBox1.Location = new Point(13, 27);
             pictureBox1.Margin = new Padding(4, 3, 4, 3);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(614, 123);
+            pictureBox1.Size = new Size(425, 23);
             pictureBox1.TabIndex = 6;
             pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
+            // 
+            // HPPlayerBar
+            // 
+            HPPlayerBar.BackColor = Color.FloralWhite;
+            HPPlayerBar.ForeColor = SystemColors.MenuText;
+            HPPlayerBar.Location = new Point(39, 28);
+            HPPlayerBar.Margin = new Padding(4, 3, 4, 3);
+            HPPlayerBar.Name = "HPPlayerBar";
+            HPPlayerBar.RightToLeft = RightToLeft.Yes;
+            HPPlayerBar.Size = new Size(371, 22);
+            HPPlayerBar.TabIndex = 0;
+            HPPlayerBar.Value = 100;
             // 
             // pictureBox2
             // 
             pictureBox2.BackColor = Color.Transparent;
-            pictureBox2.ImageLocation = "D:\\Ilyxa\\УЧЕБА\\Прога\\GAME\\GameForULearnCourse\\Arena\\Arena\\Arena\\Sprites\\HpBarEnemy.png";
-            pictureBox2.Location = new Point(626, 14);
+            pictureBox2.Image = Properties.Resources.bar;
+            pictureBox2.ImageLocation = "D:\\Ilyxa\\УЧЕБА\\Прога\\GAME\\GameForULearnCourse\\Arena\\Arena\\Arena\\Sprites\\HpBarHero.png";
+            pictureBox2.Location = new Point(790, 27);
             pictureBox2.Margin = new Padding(4, 3, 4, 3);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(614, 123);
+            pictureBox2.Size = new Size(425, 23);
             pictureBox2.TabIndex = 7;
             pictureBox2.TabStop = false;
             // 
-            // pictureBox3
+            // progressBar1
             // 
-            pictureBox3.ImageLocation = "D:\\Ilyxa\\УЧЕБА\\Прога\\GAME\\GameForULearnCourse\\Arena\\Arena\\Arena\\Sprites\\heroWinner.png";
-            pictureBox3.Location = new Point(-6, 60);
-            pictureBox3.Margin = new Padding(4, 3, 4, 3);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(1547, 801);
-            pictureBox3.TabIndex = 8;
-            pictureBox3.TabStop = false;
-            pictureBox3.Visible = false;
-            // 
-            // pictureBox4
-            // 
-            pictureBox4.ImageLocation = "D:\\Ilyxa\\УЧЕБА\\Прога\\GAME\\GameForULearnCourse\\Arena\\Arena\\Arena\\Sprites\\satyrWinner.png";
-            pictureBox4.Location = new Point(-18, 14);
-            pictureBox4.Margin = new Padding(4, 3, 4, 3);
-            pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(1547, 847);
-            pictureBox4.TabIndex = 9;
-            pictureBox4.TabStop = false;
-            pictureBox4.Visible = false;
+            progressBar1.BackColor = Color.FloralWhite;
+            progressBar1.ForeColor = SystemColors.MenuText;
+            progressBar1.Location = new Point(817, 28);
+            progressBar1.Margin = new Padding(4, 3, 4, 3);
+            progressBar1.Name = "progressBar1";
+            progressBar1.RightToLeft = RightToLeft.Yes;
+            progressBar1.Size = new Size(371, 22);
+            progressBar1.TabIndex = 8;
+            progressBar1.Value = 100;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1239, 667);
+            Controls.Add(progressBar1);
+            Controls.Add(pictureBox2);
             Controls.Add(labelEnemy);
             Controls.Add(labelPlayer);
-            Controls.Add(HPEnemyBar);
             Controls.Add(HPPlayerBar);
             Controls.Add(pictureBox1);
-            Controls.Add(pictureBox2);
-            Controls.Add(pictureBox3);
-            Controls.Add(pictureBox4);
             DoubleBuffered = true;
             Margin = new Padding(4, 3, 4, 3);
             MaximumSize = new Size(1255, 706);
@@ -176,8 +150,6 @@ namespace Skyrim_Mortal
             Paint += OnPaint;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -194,6 +166,7 @@ namespace Skyrim_Mortal
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.PictureBox pictureBox4;
+        private ProgressBar progressBar1;
     }
 }
 

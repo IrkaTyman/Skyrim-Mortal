@@ -5,8 +5,8 @@ namespace Skyrim_Mortal
 {
     public partial class Form1 : Form
     {
-        Player player;
-        Player enemy;
+        Player playerFirst;
+        Player playerSecond;
         SoundPlayer simpleSound;
 
 
@@ -33,8 +33,8 @@ namespace Skyrim_Mortal
             labelPlayer.Text = "Fire";
             labelEnemy.Text = "Fire";
 
-            player = new Player(0,120, Hero.Icon);
-            enemy = new Player(1050, 420, Danmer.Icon);
+            playerFirst = new Player(new Point(0, 120), Nord.Icon);
+            playerSecond = new Player(new Point(1050, 420), Danmer.Icon);
 
             timer1.Start();
         }
@@ -44,145 +44,145 @@ namespace Skyrim_Mortal
             switch (e.KeyCode)
             {
                 case Keys.W:
-                    player.dY = 0;
+                    playerFirst.dY = 0;
                     break;
                 case Keys.A:
-                    player.dX = 0;
+                    playerFirst.dX = 0;
                     break;
                 case Keys.S:
-                    player.dY = 0;
+                    playerFirst.dY = 0;
                     break;
                 case Keys.D:
-                    player.dX = 0;
+                    playerFirst.dX = 0;
                     break;
                 case Keys.Up:
-                    enemy.dY = 0;
+                    playerSecond.dY = 0;
                     break;
                 case Keys.Left:
-                    enemy.dX = 0;
+                    playerSecond.dX = 0;
                     break;
                 case Keys.Down:
-                    enemy.dY = 0;
+                    playerSecond.dY = 0;
                     break;
                 case Keys.Right:
-                    enemy.dX = 0;
+                    playerSecond.dX = 0;
                     break;
             }
 
-            if (player.dY == 0 && player.dX == 0)
+            if (playerFirst.dY == 0 && playerFirst.dX == 0)
             {
-                player.IsMoving = false;
-                player.SetAnimationConfiguration(0);
+                playerFirst.IsMoving = false;
+                playerFirst.SetAnimationConfiguration(0);
             }
 
-            if (enemy.dY == 0 && enemy.dX == 0)
+            if (playerSecond.dY == 0 && playerSecond.dX == 0)
             {
-                enemy.IsMoving = false;
-                enemy.SetAnimationConfiguration(0);
+                playerSecond.IsMoving = false;
+                playerSecond.SetAnimationConfiguration(0);
             }
         }
 
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
-            if (player.IsAlive)
+            if (playerFirst.IsAlive)
             {
                 switch (e.KeyCode)
                 {
                     case Keys.W:
-                        player.IsMoving = true;
-                        player.SetAnimationConfiguration(1);
-                        player.dY = -player.Speed;
+                        playerFirst.IsMoving = true;
+                        playerFirst.SetAnimationConfiguration(1);
+                        playerFirst.dY = -playerFirst.Speed;
                         break;
                     case Keys.A:
-                        player.IsMoving = true;
-                        player.Flip = -1;
-                        player.SetAnimationConfiguration(1);
-                        player.dX = -player.Speed;
+                        playerFirst.IsMoving = true;
+                        playerFirst.Flip = -1;
+                        playerFirst.SetAnimationConfiguration(1);
+                        playerFirst.dX = -playerFirst.Speed;
                         break;
                     case Keys.S:
-                        player.IsMoving = true;
-                        player.SetAnimationConfiguration(1);
-                        player.dY = player.Speed;
+                        playerFirst.IsMoving = true;
+                        playerFirst.SetAnimationConfiguration(1);
+                        playerFirst.dY = playerFirst.Speed;
                         break;
                     case Keys.D:
-                        player.IsMoving = true;
-                        player.Flip = 1;
-                        player.SetAnimationConfiguration(1);
-                        player.dX = player.Speed;
+                        playerFirst.IsMoving = true;
+                        playerFirst.Flip = 1;
+                        playerFirst.SetAnimationConfiguration(1);
+                        playerFirst.dX = playerFirst.Speed;
                         break;
                     case Keys.Space:
-                        if (player.IsCollide(enemy) && player.IsStronger(enemy))
-                            enemy.GetDamage();
-                        player.dX = 0;
-                        player.dY = 0;
-                        player.SetAnimationConfiguration(2);
+                        if (playerFirst.IsCollide(playerSecond) && playerFirst.IsStronger(playerSecond))
+                            playerSecond.GetDamage();
+                        playerFirst.dX = 0;
+                        playerFirst.dY = 0;
+                        playerFirst.SetAnimationConfiguration(2);
                         break;
                     case Keys.F:
-                        player.CurElement = Player.Element.Fire;
+                        playerFirst.CurElement = Player.Element.Fire;
                         labelPlayer.Text = "Fire";
                         break;
                     case Keys.G:
-                        player.CurElement = Player.Element.Earth;
+                        playerFirst.CurElement = Player.Element.Earth;
                         labelPlayer.Text = "Earth";
                         break;
                     case Keys.H:
-                        player.CurElement = Player.Element.Electricity;
+                        playerFirst.CurElement = Player.Element.Electricity;
                         labelPlayer.Text = "Electricity";
                         break;
                     case Keys.J:
-                        player.CurElement = Player.Element.Water;
+                        playerFirst.CurElement = Player.Element.Water;
                         labelPlayer.Text = "Water";
                         break;
                 }
             }
 
-            if (enemy.IsAlive)
+            if (playerSecond.IsAlive)
             {
                 switch (e.KeyCode)
                 {
                     case Keys.Up:
-                        enemy.IsMoving = true;
-                        enemy.SetAnimationConfiguration(1);
-                        enemy.dY = -enemy.Speed;
+                        playerSecond.IsMoving = true;
+                        playerSecond.SetAnimationConfiguration(1);
+                        playerSecond.dY = -playerSecond.Speed;
                         break;
                     case Keys.Left:
-                        enemy.IsMoving = true;
-                        enemy.Flip = -1;
-                        enemy.SetAnimationConfiguration(1);
-                        enemy.dX = -enemy.Speed;
+                        playerSecond.IsMoving = true;
+                        playerSecond.Flip = -1;
+                        playerSecond.SetAnimationConfiguration(1);
+                        playerSecond.dX = -playerSecond.Speed;
                         break;
                     case Keys.Down:
-                        enemy.IsMoving = true;
-                        enemy.SetAnimationConfiguration(1);
-                        enemy.dY = enemy.Speed;
+                        playerSecond.IsMoving = true;
+                        playerSecond.SetAnimationConfiguration(1);
+                        playerSecond.dY = playerSecond.Speed;
                         break;
                     case Keys.Right:
-                        enemy.IsMoving = true;
-                        enemy.Flip = 1;
-                        enemy.SetAnimationConfiguration(1);
-                        enemy.dX = enemy.Speed;
+                        playerSecond.IsMoving = true;
+                        playerSecond.Flip = 1;
+                        playerSecond.SetAnimationConfiguration(1);
+                        playerSecond.dX = playerSecond.Speed;
                         break;
                     case Keys.Enter:
-                        if (enemy.IsCollide(player) && enemy.IsStronger(player))
-                            player.GetDamage();
-                        enemy.dX = 0;
-                        enemy.dY = 0;
-                        enemy.SetAnimationConfiguration(2);
+                        if (playerSecond.IsCollide(playerFirst) && playerSecond.IsStronger(playerFirst))
+                            playerFirst.GetDamage();
+                        playerSecond.dX = 0;
+                        playerSecond.dY = 0;
+                        playerSecond.SetAnimationConfiguration(2);
                         break;
                     case Keys.NumPad0:
-                        enemy.CurElement = Player.Element.Fire;
+                        playerSecond.CurElement = Player.Element.Fire;
                         labelEnemy.Text = "Fire";
                         break;
                     case Keys.NumPad1:
-                        enemy.CurElement = Player.Element.Earth;
+                        playerSecond.CurElement = Player.Element.Earth;
                         labelEnemy.Text = "Earth";
                         break;
                     case Keys.NumPad2:
-                        enemy.CurElement = Player.Element.Electricity;
+                        playerSecond.CurElement = Player.Element.Electricity;
                         labelEnemy.Text = "Electricity";
                         break;
                     case Keys.NumPad3:
-                        enemy.CurElement = Player.Element.Water;
+                        playerSecond.CurElement = Player.Element.Water;
                         labelEnemy.Text = "Water";
                         break;
                 }
@@ -191,23 +191,23 @@ namespace Skyrim_Mortal
 
         private void Update(object sender, EventArgs e)
         {
-            player.Move();
-            enemy.Move();
+            playerFirst.Move();
+            playerSecond.Move();
 
-            if (player.HP < 100 && player.HP >= 0)
-                HPPlayerBar.Value = player.HP;
-            if (enemy.HP < 100 && enemy.HP >= 0)
-                HPEnemyBar.Value = enemy.HP;
+            if (playerFirst.HP < 100 && playerFirst.HP >= 0)
+                HPPlayerBar.Value = playerFirst.HP;
+            if (playerSecond.HP < 100 && playerSecond.HP >= 0)
+                HPEnemyBar.Value = playerSecond.HP;
 
-            if (player.HP == 0)
+            if (playerFirst.HP == 0)
             {
-                player.IsDead();
+                playerFirst.IsDead();
                 pictureBox4.Visible = true;
             }
 
-            if (enemy.HP == 0)
+            if (playerSecond.HP == 0)
             {
-                enemy.IsDead();
+                playerSecond.IsDead();
                 pictureBox3.Visible = true;
             }
 
@@ -219,8 +219,8 @@ namespace Skyrim_Mortal
             Graphics graphics = e.Graphics;
 
             DrawMap(graphics);
-            PlayAnimation(graphics, player);
-            PlayAnimation(graphics, enemy);
+            PlayAnimation(graphics, playerFirst);
+            PlayAnimation(graphics, playerSecond);
         }
 
         private void PlayAnimation(Graphics graphics, Player player)
@@ -233,7 +233,7 @@ namespace Skyrim_Mortal
                 player.CurFrame = 0;
 
             graphics.DrawImage(player.Sprite,
-                    new Rectangle(new Point(player.PosX, player.PosY), new Size(player.Size, player.Size)),
+                    new Rectangle(new Point(player.Position.X, player.Position.Y), new Size(player.Size, player.Size)),
                     150 * player.CurFrame, 150 * player.CurAnimation, player.Size, player.Size, GraphicsUnit.Point);
         }
 
@@ -243,7 +243,7 @@ namespace Skyrim_Mortal
                 for (int j = 0; j < Map.MapWidth; j++)
                 {
                     var thing = Map.MapThings[i, j];
-                    if(thing == null) continue;
+                    if (thing == null) continue;
                     graphics.DrawImage(thing.Image, new Point(j * Map.CellSize, i * Map.CellSize));
                 }
         }
@@ -254,6 +254,11 @@ namespace Skyrim_Mortal
         }
 
         private void pictureBox3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
 
         }

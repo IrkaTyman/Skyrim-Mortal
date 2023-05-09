@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
 namespace Skyrim.Model;
 
 public class Player
 {
-    public int PosX;
-    public int PosY;
+    public Point Position;
     public int dX;
     public int dY;
     public bool IsMoving;
@@ -39,10 +33,9 @@ public class Player
         Water = 24
     }
 
-    public Player(int posX, int posY, Image sprite)
+    public Player(Point pos, Image sprite)
     {
-        PosX = posX;
-        PosY = posY;
+        Position = pos;
         Flip = 1;
         IdleFrames = 7;
         RunFrames = 7;
@@ -56,19 +49,14 @@ public class Player
         HP = 100;
         IsAlive = true;
         CurElement = Element.Fire;
-        // Размеры всех спрайтов
         Size = 150;
     }
 
     public void Move()
     {
-        if (!Map.IsCollide(this, new Point(dX, dY)))
+        if (!Map.IsCollide(this, new Point(dX, dY)) && IsMoving)
         {
-            if (IsMoving)
-            {
-                PosX += dX;
-                PosY += dY;
-            }
+            Position = Position +  new Size(dX, dY);
         }
     }
 
@@ -104,9 +92,9 @@ public class Player
             if (Math.Abs(delta.Y) <= (enemy.Size / 2 + Size / 2) / 1.5)
             {
                 return delta.X != 0
-                    ? enemy.PosY + enemy.Size / 2 > PosY && enemy.PosY + enemy.Size / 2 < PosY + Size
+                    ? enemy.Position.Y + enemy.Size / 2 > Position.Y && enemy.Position.Y + enemy.Size / 2 < Position.Y + Size
                     : delta.Y != 0
-                    ? enemy.PosX + enemy.Size / 2 > PosX && enemy.PosX + enemy.Size / 2 < PosX + Size
+                    ? enemy.Position.X + enemy.Size / 2 > Position.X && enemy.Position.X + enemy.Size / 2 < Position.X + Size
                     : false;
             }
         }
@@ -145,8 +133,8 @@ public class Player
     {
         var del = new PointF()
         {
-            X = (enemy.PosX + enemy.Size / 2) - (PosX + Size / 2),
-            Y = (enemy.PosY + enemy.Size / 2) - (PosY + Size / 2)
+            X = (enemy.Position.X + enemy.Size / 2) - (Position.X + Size / 2),
+            Y = (enemy.Position.Y + enemy.Size / 2) - (Position.Y + Size / 2)
         };
 
         return del;

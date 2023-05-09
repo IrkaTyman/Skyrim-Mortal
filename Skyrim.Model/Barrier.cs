@@ -4,14 +4,16 @@ namespace Skyrim.Model;
 
 public class Barrier
 {
-    public PointF Position;
+    public Point Position;
     public Size Size;
     public Image Image;
+    public int HP;
 
-    public Barrier(PointF pos, Size size, Image image) 
+    public Barrier(Point pos, Size size, Image image, int hp) 
     {
         Position = pos;
         Size = size;
         Image = image;
+        HP = hp;
     }
 }

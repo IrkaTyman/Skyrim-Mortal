@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33414.496
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skyrim-Mortal", "Skyrim-Mortal\Skyrim-Mortal.csproj", "{60112337-438B-4FD0-8D37-A24EC6088BA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skyrim.Model", "Skyrim.Model\Skyrim.Model.csproj", "{89C1AB4D-3346-4D5B-AD28-11C8DDBF8300}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{60112337-438B-4FD0-8D37-A24EC6088BA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60112337-438B-4FD0-8D37-A24EC6088BA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60112337-438B-4FD0-8D37-A24EC6088BA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60112337-438B-4FD0-8D37-A24EC6088BA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89C1AB4D-3346-4D5B-AD28-11C8DDBF8300}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89C1AB4D-3346-4D5B-AD28-11C8DDBF8300}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89C1AB4D-3346-4D5B-AD28-11C8DDBF8300}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89C1AB4D-3346-4D5B-AD28-11C8DDBF8300}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E844F69C-54A6-4734-8E4E-CD36067E6B77}
+	EndGlobalSection
+EndGlobal

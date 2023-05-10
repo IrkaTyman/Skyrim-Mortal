@@ -34,13 +34,17 @@ namespace Skyrim_Mortal
             timer1 = new System.Windows.Forms.Timer(components);
             labelPlayer1 = new Label();
             imageList1 = new ImageList(components);
-            HPPlayerBar = new ProgressBar();
+            HPPlayer1Bar = new ProgressBar();
             pictureBox6 = new PictureBox();
             labelPlayer2 = new Label();
-            progressBar1 = new ProgressBar();
+            HPPlayer2Bar = new ProgressBar();
             pictureBox7 = new PictureBox();
+            winScreen = new PictureBox();
+            repeatButton = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)winScreen).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repeatButton).BeginInit();
             SuspendLayout();
             // 
             // timer1
@@ -67,17 +71,17 @@ namespace Skyrim_Mortal
             imageList1.ImageSize = new Size(16, 16);
             imageList1.TransparentColor = Color.Transparent;
             // 
-            // HPPlayerBar
+            // HPPlayer1Bar
             // 
-            HPPlayerBar.BackColor = Color.FloralWhite;
-            HPPlayerBar.ForeColor = SystemColors.MenuText;
-            HPPlayerBar.Location = new Point(38, 14);
-            HPPlayerBar.Margin = new Padding(4, 3, 4, 3);
-            HPPlayerBar.Name = "HPPlayerBar";
-            HPPlayerBar.RightToLeft = RightToLeft.Yes;
-            HPPlayerBar.Size = new Size(370, 20);
-            HPPlayerBar.TabIndex = 0;
-            HPPlayerBar.Value = 100;
+            HPPlayer1Bar.BackColor = Color.FloralWhite;
+            HPPlayer1Bar.ForeColor = SystemColors.MenuText;
+            HPPlayer1Bar.Location = new Point(38, 14);
+            HPPlayer1Bar.Margin = new Padding(4, 3, 4, 3);
+            HPPlayer1Bar.Name = "HPPlayer1Bar";
+            HPPlayer1Bar.RightToLeft = RightToLeft.Yes;
+            HPPlayer1Bar.Size = new Size(370, 20);
+            HPPlayer1Bar.TabIndex = 0;
+            HPPlayer1Bar.Value = 100;
             // 
             // pictureBox6
             // 
@@ -102,17 +106,17 @@ namespace Skyrim_Mortal
             labelPlayer2.TabIndex = 11;
             labelPlayer2.Text = "label1";
             // 
-            // progressBar1
+            // HPPlayer2Bar
             // 
-            progressBar1.BackColor = Color.FloralWhite;
-            progressBar1.ForeColor = SystemColors.MenuText;
-            progressBar1.Location = new Point(829, 16);
-            progressBar1.Margin = new Padding(4, 3, 4, 3);
-            progressBar1.Name = "progressBar1";
-            progressBar1.RightToLeft = RightToLeft.Yes;
-            progressBar1.Size = new Size(370, 20);
-            progressBar1.TabIndex = 10;
-            progressBar1.Value = 100;
+            HPPlayer2Bar.BackColor = Color.FloralWhite;
+            HPPlayer2Bar.ForeColor = SystemColors.MenuText;
+            HPPlayer2Bar.Location = new Point(829, 16);
+            HPPlayer2Bar.Margin = new Padding(4, 3, 4, 3);
+            HPPlayer2Bar.Name = "HPPlayer2Bar";
+            HPPlayer2Bar.RightToLeft = RightToLeft.Yes;
+            HPPlayer2Bar.Size = new Size(370, 20);
+            HPPlayer2Bar.TabIndex = 10;
+            HPPlayer2Bar.Value = 100;
             // 
             // pictureBox7
             // 
@@ -124,16 +128,36 @@ namespace Skyrim_Mortal
             pictureBox7.TabIndex = 12;
             pictureBox7.TabStop = false;
             // 
+            // winScreen
+            // 
+            winScreen.Location = new Point(366, 168);
+            winScreen.Name = "winScreen";
+            winScreen.Size = new Size(518, 324);
+            winScreen.TabIndex = 13;
+            winScreen.TabStop = false;
+            // 
+            // repeatButton
+            // 
+            repeatButton.Image = (Image)resources.GetObject("repeatButton.Image");
+            repeatButton.Location = new Point(545, 454);
+            repeatButton.Name = "repeatButton";
+            repeatButton.Size = new Size(166, 29);
+            repeatButton.TabIndex = 14;
+            repeatButton.TabStop = false;
+            repeatButton.Click += repeatButton_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1239, 667);
+            Controls.Add(repeatButton);
+            Controls.Add(winScreen);
             Controls.Add(labelPlayer2);
-            Controls.Add(progressBar1);
+            Controls.Add(HPPlayer2Bar);
             Controls.Add(pictureBox7);
             Controls.Add(labelPlayer1);
-            Controls.Add(HPPlayerBar);
+            Controls.Add(HPPlayer1Bar);
             Controls.Add(pictureBox6);
             DoubleBuffered = true;
             Margin = new Padding(4, 3, 4, 3);
@@ -144,6 +168,8 @@ namespace Skyrim_Mortal
             Paint += OnPaint;
             ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
+            ((System.ComponentModel.ISupportInitialize)winScreen).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repeatButton).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -151,8 +177,8 @@ namespace Skyrim_Mortal
         #endregion
 
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.ProgressBar HPPlayerBar;
-        private System.Windows.Forms.ProgressBar HPEnemyBar;
+        private System.Windows.Forms.ProgressBar HPPlayer1Bar;
+        private System.Windows.Forms.ProgressBar HPPlayer2Var;
         private System.Windows.Forms.Label labelPlayer1;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.PictureBox pictureBox1;
@@ -164,6 +190,9 @@ namespace Skyrim_Mortal
         private Label labelPlayer2;
         private ProgressBar progressBar1;
         private PictureBox pictureBox7;
+        private PictureBox winScreen;
+        private PictureBox repeatButton;
+        private ProgressBar HPPlayer2Bar;
     }
 }
 

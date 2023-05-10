@@ -1,5 +1,6 @@
 using Skyrim.Model;
 using System.Media;
+using System.Security.Policy;
 
 namespace Skyrim_Mortal
 {
@@ -32,8 +33,10 @@ namespace Skyrim_Mortal
             this.Height = Map.CellSize * (Map.MapHeight + 1) + 8;
             labelPlayer1.Text = "Fire";
             labelPlayer2.Text = "Fire";
+            winScreen.Visible = false;
+            repeatButton.Visible = false;
 
-            playerFirst = new Player(new Point(150,420), Nord.Icon);
+            playerFirst = new Player(new Point(150, 420), Nord.Icon);
             playerSecond = new Player(new Point(1050, 420), Danmer.Icon);
 
             timer1.Start();
@@ -168,6 +171,9 @@ namespace Skyrim_Mortal
                     case Keys.Enter:
                         if (playerSecond.IsCollide(playerFirst) && playerSecond.IsStronger(playerFirst))
                             playerFirst.GetDamage();
+                        var (IsCollide, Barrier) = Map.FindCollide(playerFirst, new Point(playerFirst.Speed * playerFirst.Flip, 0));
+                        if (Barrier != null)
+                            Barrier.GetDamage();
                         playerSecond.dX = 0;
                         playerSecond.dY = 0;
                         playerSecond.SetAnimationConfiguration(2);
@@ -197,21 +203,27 @@ namespace Skyrim_Mortal
             playerFirst.Move();
             playerSecond.Move();
 
-            if (playerFirst.HP < 100 && playerFirst.HP >= 0)
-                HPPlayerBar.Value = playerFirst.HP;
-            if (playerSecond.HP < 100 && playerSecond.HP >= 0)
-                HPEnemyBar.Value = playerSecond.HP;
+            if (playerFirst.HP <= 100 && playerFirst.HP >= 0 && HPPlayer1Bar != null)
+                HPPlayer1Bar.Value = playerFirst.HP;
+            if (playerSecond.HP <= 100 && playerSecond.HP >= 0 && HPPlayer2Var != null)
+                HPPlayer2Var.Value = playerSecond.HP;
 
             if (playerFirst.HP == 0)
             {
                 playerFirst.IsDead();
-                pictureBox4.Visible = true;
+                repeatButton.Visible = true;
+                winScreen.Visible = true;
+                var url = new DirectoryInfo(Directory.GetCurrentDirectory());
+                winScreen.Image = new Bitmap(Path.Combine(url.Parent.Parent.Parent.FullName.ToString(), "Sprites\\danmer-win.png"));
             }
 
             if (playerSecond.HP == 0)
             {
                 playerSecond.IsDead();
-                pictureBox3.Visible = true;
+                repeatButton.Visible = true;
+                winScreen.Visible = true;
+                var url = new DirectoryInfo(Directory.GetCurrentDirectory());
+                winScreen.Image = new Bitmap(Path.Combine(url.Parent.Parent.Parent.FullName.ToString(), "Sprites\\nord-win.png"));
             }
 
             Invalidate();
@@ -228,11 +240,10 @@ namespace Skyrim_Mortal
 
         private void PlayAnimation(Graphics graphics, Player player)
         {
-            if (player.IsAlive == false)
-                return;
+
             if (player.CurFrame < player.CurFrames - 1)
                 player.CurFrame++;
-            else
+            else if(player.IsAlive)
                 player.CurFrame = 0;
 
             graphics.DrawImage(player.Sprite,
@@ -270,6 +281,11 @@ namespace Skyrim_Mortal
         private void labelPlayer_Click_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void repeatButton_Click(object sender, EventArgs e)
+        {
+            Initialize();
         }
     }
 }

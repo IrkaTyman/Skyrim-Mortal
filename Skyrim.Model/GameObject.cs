@@ -4,8 +4,8 @@ namespace Skyrim.Model
 {
     public abstract class GameObject
     {
-        public Size Size;
-        public Point Position;
+        public Size Size { get; set; }
+        public Point Position { get; set; }
 
         public GameObject(Size size, Point position)
         {

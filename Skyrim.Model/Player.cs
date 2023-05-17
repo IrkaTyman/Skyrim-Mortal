@@ -144,8 +144,8 @@ public class Player: GameObject
     {
         var del = new PointF()
         {
-            X = (gameObject.Position.X + dir.X + gameObject.Size.Width / 2) - (Position.X + Size.Width / 2),
-            Y = (gameObject.Position.Y + dir.Y + gameObject.Size.Height / 2) - (Position.Y + Size.Height / 2)
+            X = (Position.X + dir.X + Size.Width / 2) - (gameObject.Position.X + gameObject.Size.Width / 2) ,
+            Y = (Position.Y + dir.Y + Size.Height / 2) - (gameObject.Position.Y + gameObject.Size.Height / 2)
         };
 
         return del;

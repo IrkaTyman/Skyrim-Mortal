@@ -15,7 +15,6 @@ public enum BarrierType
 
 public class Barrier: GameObject
 {
-    public Point Position { get; private set; }
     public Image Image;
     public int HP;
 

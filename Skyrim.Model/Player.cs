@@ -2,25 +2,26 @@
 
 namespace Skyrim.Model;
 
-public class Player
+public class Player: GameObject
 {
     public Point Position;
     public int dX;
     public int dY;
     public bool IsMoving;
     public int Speed;
+    public string Name;
 
     public int CurFrame;
     public int CurAnimation;
     public int Flip;
 
+    public Image WinImg;
     public Image Sprite;
     public int IdleFrames;
     public int RunFrames;
     public int AttackFrames;
     public int DeathFrames;
     public int CurFrames;
-    public int Size;
 
     public int HP;
     public bool IsAlive;
@@ -33,7 +34,7 @@ public class Player
         Water = 24
     }
 
-    public Player(Point pos, Image sprite)
+    public Player(Point pos, Image sprite, string name, Image winImg)
     {
         Position = pos;
         Flip = 1;
@@ -43,13 +44,15 @@ public class Player
         DeathFrames = 7;
         CurFrames = 7;
         Sprite = sprite;
+        Name = name;
+        WinImg = winImg;
         Speed = 10;
         CurAnimation = 0;
         CurFrame = 0;
         HP = 100;
         IsAlive = true;
         CurElement = Element.Fire;
-        Size = 150;
+        Size = new Size(150, 150);
     }
 
     public void Move()
@@ -83,19 +86,43 @@ public class Player
         }
     }
 
-    public bool IsCollide(Player enemy)
+    public bool IsPlayerCollide(Player enemy)
     {
-        PointF delta = FindDelta(enemy);
+        PointF delta = FindDelta(enemy, new Point(0,0));
 
-        if (Math.Abs(delta.X) <= (enemy.Size / 2 + Size / 2) / 1.5)
+        if (Math.Abs(delta.X) <= (enemy.Size.Width / 2 + Size.Width / 2) / 1.5)
         {
-            if (Math.Abs(delta.Y) <= (enemy.Size / 2 + Size / 2) / 1.5)
+            if (Math.Abs(delta.Y) <= (enemy.Size.Height / 2 + Size.Height / 2) / 1.5)
             {
                 return delta.X != 0
-                    ? enemy.Position.Y + enemy.Size / 2 > Position.Y && enemy.Position.Y + enemy.Size / 2 < Position.Y + Size
+                    ? enemy.Position.Y + enemy.Size.Height / 2 > Position.Y && enemy.Position.Y + enemy.Size.Height / 2 < Position.Y + Size.Height
                     : delta.Y != 0
-                    ? enemy.Position.X + enemy.Size / 2 > Position.X && enemy.Position.X + enemy.Size / 2 < Position.X + Size
+                    ? enemy.Position.X + enemy.Size.Width / 2 > Position.X && enemy.Position.X + enemy.Size.Width / 2 < Position.X + Size.Width
                     : false;
+            }
+        }
+        return false;
+    }
+
+    public bool IsBarrierCollide(Barrier barrier, Point dir)
+    {
+        PointF delta = FindDelta(barrier, dir);
+        if (Math.Abs(delta.X) <= (Size.Width / 2 + barrier.Size.Width / 2) / 1.7)
+        {
+            if (Math.Abs(delta.Y) <= ( Size.Height / 2 + barrier.Size.Height / 2) / 1.5)
+            {
+                if ((delta.X < 0 && dir.X == Speed || delta.X > 0 && dir.X == -Speed)
+                && (Position.X + dir.X <= barrier.Position.X && Position.X + dir.X + Size.Width <= barrier.Position.X + barrier.Size.Width
+                || Position.X + dir.X <= barrier.Position.X + barrier.Size.Width && Position.X + dir.X + Size.Width >= barrier.Position.X + barrier.Size.Width))
+                {
+                    return true;
+                }
+                if ((delta.Y < 0 && dir.Y == Speed || delta.Y > 0 && dir.Y == -Speed)
+                && (Position.Y + dir.Y <= barrier.Position.Y && Position.Y + dir.Y + Size.Height <= barrier.Position.Y + barrier.Size.Height
+                || Position.Y + dir.Y <= barrier.Position.Y + barrier.Size.Height && Position.Y + dir.Y + Size.Height >= barrier.Position.Y + barrier.Size.Height))
+                {
+                    return true;
+                }
             }
         }
         return false;
@@ -103,7 +130,8 @@ public class Player
 
     public void GetDamage()
     {
-        HP -= 10;
+        if(HP > 0)
+            HP -= 10;
     }
 
     public void IsDead()
@@ -113,28 +141,12 @@ public class Player
         SetAnimationConfiguration(3);
     }
 
-    public bool IsStronger(Player enemy)
-    {
-        switch (CurElement)
-        {
-            case Element.Fire:
-                return enemy.CurElement == Element.Earth;
-            case Element.Earth:
-                return enemy.CurElement == Element.Electricity;
-            case Element.Electricity:
-                return enemy.CurElement == Element.Water;
-            case Element.Water:
-                return enemy.CurElement == Element.Fire;
-        }
-        return false;
-    }
-
-    private PointF FindDelta(Player enemy)
+    private PointF FindDelta(GameObject gameObject, Point dir)
     {
         var del = new PointF()
         {
-            X = (enemy.Position.X + enemy.Size / 2) - (Position.X + Size / 2),
-            Y = (enemy.Position.Y + enemy.Size / 2) - (Position.Y + Size / 2)
+            X = (gameObject.Position.X + dir.X + gameObject.Size.Width / 2) - (Position.X + Size.Width / 2),
+            Y = (gameObject.Position.Y + dir.Y + gameObject.Size.Height / 2) - (Position.Y + Size.Height / 2)
         };
 
         return del;

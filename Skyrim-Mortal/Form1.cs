@@ -31,13 +31,15 @@ namespace Skyrim_Mortal
             this.BackgroundImage = Map.MapBackground;
             this.Width = Map.CellSize * Map.MapWidth + 15;
             this.Height = Map.CellSize * (Map.MapHeight + 1) + 8;
-            labelPlayer1.Text = "Fire";
-            labelPlayer2.Text = "Fire";
             winScreen.Visible = false;
             repeatButton.Visible = false;
 
-            playerFirst = new Player(new Point(150, 420), Nord.Icon);
-            playerSecond = new Player(new Point(1050, 420), Danmer.Icon);
+            var data = new Races();
+            playerFirst = new Player(new Point(150, 420), data[RaceType.Nord].Sprite, data[RaceType.Nord].Name, data[RaceType.Nord].WinImg);
+            playerSecond = new Player(new Point(150, 500), data[RaceType.Danmer].Sprite, data[RaceType.Danmer].Name, data[RaceType.Danmer].WinImg);
+
+            labelPlayer1.Text = playerFirst.Name;
+            labelPlayer2.Text = playerSecond.Name;
 
             timer1.Start();
         }
@@ -114,7 +116,7 @@ namespace Skyrim_Mortal
                         playerFirst.dX = playerFirst.Speed;
                         break;
                     case Keys.Space:
-                        if (playerFirst.IsCollide(playerSecond) && playerFirst.IsStronger(playerSecond))
+                        if (playerFirst.IsCollide(playerSecond))
                             playerSecond.GetDamage();
                         var (IsCollide, Barrier) = Map.FindCollide(playerFirst, new Point(playerFirst.Speed * playerFirst.Flip, 0));
                         if (Barrier != null)
@@ -122,22 +124,6 @@ namespace Skyrim_Mortal
                         playerFirst.dX = 0;
                         playerFirst.dY = 0;
                         playerFirst.SetAnimationConfiguration(2);
-                        break;
-                    case Keys.F:
-                        playerFirst.CurElement = Player.Element.Fire;
-                        labelPlayer1.Text = "Fire";
-                        break;
-                    case Keys.G:
-                        playerFirst.CurElement = Player.Element.Earth;
-                        labelPlayer1.Text = "Earth";
-                        break;
-                    case Keys.H:
-                        playerFirst.CurElement = Player.Element.Electricity;
-                        labelPlayer1.Text = "Electricity";
-                        break;
-                    case Keys.J:
-                        playerFirst.CurElement = Player.Element.Water;
-                        labelPlayer1.Text = "Water";
                         break;
                 }
             }
@@ -169,7 +155,7 @@ namespace Skyrim_Mortal
                         playerSecond.dX = playerSecond.Speed;
                         break;
                     case Keys.Enter:
-                        if (playerSecond.IsCollide(playerFirst) && playerSecond.IsStronger(playerFirst))
+                        if (playerSecond.IsCollide(playerFirst))
                             playerFirst.GetDamage();
                         var (IsCollide, Barrier) = Map.FindCollide(playerFirst, new Point(playerFirst.Speed * playerFirst.Flip, 0));
                         if (Barrier != null)
@@ -177,22 +163,6 @@ namespace Skyrim_Mortal
                         playerSecond.dX = 0;
                         playerSecond.dY = 0;
                         playerSecond.SetAnimationConfiguration(2);
-                        break;
-                    case Keys.NumPad0:
-                        playerSecond.CurElement = Player.Element.Fire;
-                        labelPlayer2.Text = "Fire";
-                        break;
-                    case Keys.NumPad1:
-                        playerSecond.CurElement = Player.Element.Earth;
-                        labelPlayer2.Text = "Earth";
-                        break;
-                    case Keys.NumPad2:
-                        playerSecond.CurElement = Player.Element.Electricity;
-                        labelPlayer2.Text = "Electricity";
-                        break;
-                    case Keys.NumPad3:
-                        playerSecond.CurElement = Player.Element.Water;
-                        labelPlayer2.Text = "Water";
                         break;
                 }
             }
@@ -205,16 +175,19 @@ namespace Skyrim_Mortal
 
             if (playerFirst.HP <= 100 && playerFirst.HP >= 0 && HPPlayer1Bar != null)
                 HPPlayer1Bar.Value = playerFirst.HP;
-            if (playerSecond.HP <= 100 && playerSecond.HP >= 0 && HPPlayer2Var != null)
-                HPPlayer2Var.Value = playerSecond.HP;
+            if (playerSecond.HP <= 100 && playerSecond.HP >= 0 && HPPlayer2Bar != null)
+            {
+                var v = playerSecond.HP;
+                HPPlayer2Bar.Value = playerSecond.HP;
+            }
+                
 
             if (playerFirst.HP == 0)
             {
                 playerFirst.IsDead();
                 repeatButton.Visible = true;
                 winScreen.Visible = true;
-                var url = new DirectoryInfo(Directory.GetCurrentDirectory());
-                winScreen.Image = new Bitmap(Path.Combine(url.Parent.Parent.Parent.FullName.ToString(), "Sprites\\danmer-win.png"));
+                winScreen.Image = playerSecond.WinImg;
             }
 
             if (playerSecond.HP == 0)
@@ -222,8 +195,7 @@ namespace Skyrim_Mortal
                 playerSecond.IsDead();
                 repeatButton.Visible = true;
                 winScreen.Visible = true;
-                var url = new DirectoryInfo(Directory.GetCurrentDirectory());
-                winScreen.Image = new Bitmap(Path.Combine(url.Parent.Parent.Parent.FullName.ToString(), "Sprites\\nord-win.png"));
+                winScreen.Image = playerFirst.WinImg;
             }
 
             Invalidate();

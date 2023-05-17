@@ -19,7 +19,7 @@ public class Barrier: GameObject
     public Image Image;
     public int HP;
 
-    public Barrier(Size size, Image image, int hp)
+    public Barrier(Size size, Image image, int hp): base(size)
     {
         Size = size;
         Image = image;

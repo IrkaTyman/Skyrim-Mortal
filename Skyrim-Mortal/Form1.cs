@@ -35,8 +35,8 @@ namespace Skyrim_Mortal
             repeatButton.Visible = false;
 
             var data = new Races();
-            playerFirst = new Player(new Point(150, 420), data[RaceType.Nord].Sprite, data[RaceType.Nord].Name, data[RaceType.Nord].WinImg);
-            playerSecond = new Player(new Point(150, 500), data[RaceType.Danmer].Sprite, data[RaceType.Danmer].Name, data[RaceType.Danmer].WinImg);
+            playerFirst = new Player(new Size(150, 150), new Point(150, 420), data[RaceType.Nord].Sprite, data[RaceType.Nord].Name, data[RaceType.Nord].WinImg);
+            playerSecond = new Player(new Size(150, 150), new Point(150, 500), data[RaceType.Danmer].Sprite, data[RaceType.Danmer].Name, data[RaceType.Danmer].WinImg);
 
             labelPlayer1.Text = playerFirst.Name;
             labelPlayer2.Text = playerSecond.Name;
@@ -116,7 +116,7 @@ namespace Skyrim_Mortal
                         playerFirst.dX = playerFirst.Speed;
                         break;
                     case Keys.Space:
-                        if (playerFirst.IsCollide(playerSecond))
+                        if (playerFirst.IsPlayerCollide(playerSecond))
                             playerSecond.GetDamage();
                         var (IsCollide, Barrier) = Map.FindCollide(playerFirst, new Point(playerFirst.Speed * playerFirst.Flip, 0));
                         if (Barrier != null)
@@ -155,7 +155,7 @@ namespace Skyrim_Mortal
                         playerSecond.dX = playerSecond.Speed;
                         break;
                     case Keys.Enter:
-                        if (playerSecond.IsCollide(playerFirst))
+                        if (playerSecond.IsPlayerCollide(playerFirst))
                             playerFirst.GetDamage();
                         var (IsCollide, Barrier) = Map.FindCollide(playerFirst, new Point(playerFirst.Speed * playerFirst.Flip, 0));
                         if (Barrier != null)
@@ -219,8 +219,8 @@ namespace Skyrim_Mortal
                 player.CurFrame = 0;
 
             graphics.DrawImage(player.Sprite,
-                    new Rectangle(new Point(player.Position.X, player.Position.Y), new Size(player.Size, player.Size)),
-                    150 * player.CurFrame, 150 * player.CurAnimation, player.Size, player.Size, GraphicsUnit.Point);
+                    new Rectangle(new Point(player.Position.X, player.Position.Y), player.Size),
+                    150 * player.CurFrame, 150 * player.CurAnimation, player.Size.Width, player.Size.Height, GraphicsUnit.Point);
         }
 
         private void DrawMap(Graphics graphics)

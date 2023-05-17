@@ -4,7 +4,6 @@ namespace Skyrim.Model;
 
 public class Player: GameObject
 {
-    public Point Position;
     public int dX;
     public int dY;
     public bool IsMoving;
@@ -34,7 +33,7 @@ public class Player: GameObject
         Water = 24
     }
 
-    public Player(Point pos, Image sprite, string name, Image winImg)
+    public Player(Size size, Point pos, Image sprite, string name, Image winImg): base(size, pos)
     {
         Position = pos;
         Flip = 1;
@@ -52,7 +51,7 @@ public class Player: GameObject
         HP = 100;
         IsAlive = true;
         CurElement = Element.Fire;
-        Size = new Size(150, 150);
+        Size = size;
     }
 
     public void Move()

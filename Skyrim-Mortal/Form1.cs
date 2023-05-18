@@ -242,7 +242,8 @@ namespace Skyrim_Mortal
 
         private void SetSimpleSound()
         {
-            Uri uri = new Uri(Path.Combine(new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "music\\base.wav"));
+            simpleSound = new SoundPlayer(Path.Combine(new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName.ToString(), "Sprites\\dovakin.wav"));
+            simpleSound.Play();
         }
 
         private void labelPlayer_Click(object sender, EventArgs e)

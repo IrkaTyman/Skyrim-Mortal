@@ -40,7 +40,7 @@ public class Barrier: GameObject
 public class Barriers
 {
     public static DirectoryInfo url = new DirectoryInfo(Directory.GetCurrentDirectory());
-    public static Dictionary<BarrierType, Barrier?> Data;
+    public Dictionary<BarrierType, Barrier?> Data;
 
     public Barriers()
     {
